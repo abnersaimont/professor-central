@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professor Central</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">PC</div>
+        <div>
+          <p class="eyebrow">Organizacao docente</p>
+          <h1>Professor Central</h1>
+        </div>
+      </div>
+
+      <nav class="menu">
+        <a class="menu-item active" href="#dashboard">Painel</a>
+        <a class="menu-item" href="#turmas">Turmas</a>
+        <a class="menu-item" href="#planos">Planos de aula</a>
+        <a class="menu-item" href="#documentos">Documentos</a>
+        <a class="menu-item" href="#tarefas">Pendencias</a>
+      </nav>
+
+      <section class="sidebar-card">
+        <p class="eyebrow">Hoje</p>
+        <h2>3 prioridades</h2>
+        <ul class="compact-list">
+          <li>Fechar presenca do 8o ano B</li>
+          <li>Revisar prova de Historia</li>
+          <li>Enviar comunicado aos responsaveis</li>
+        </ul>
+      </section>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Primeira versao</p>
+          <h2>Seu centro de comando como professor</h2>
+          <p class="hero-copy">
+            Um unico lugar para acompanhar aulas, alunos, documentos, notas e tudo
+            o que precisa ser lembrado durante a semana.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <button class="primary-button" id="newTaskButton" type="button">Nova pendencia</button>
+          <button class="secondary-button" type="button">Novo plano</button>
+        </div>
+      </header>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <span class="stat-label">Turmas ativas</span>
+          <strong class="stat-value" id="classCount">0</strong>
+          <span class="stat-note" id="classSummary">Comece cadastrando sua primeira turma</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Alunos cadastrados</span>
+          <strong class="stat-value" id="studentCount">0</strong>
+          <span class="stat-note" id="studentSummary">Organize listas por turma</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Turma em foco</span>
+          <strong class="stat-value" id="selectedClassLabel">-</strong>
+          <span class="stat-note" id="selectedClassSummary">Selecione uma turma para ver os alunos</span>
+        </article>
+        <article class="stat-card highlight">
+          <span class="stat-label">Pendencias urgentes</span>
+          <strong class="stat-value">4</strong>
+          <span class="stat-note">2 vencem hoje</span>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel" id="turmas">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Turmas</p>
+              <h3>Cadastro de turmas</h3>
+            </div>
+            <span class="panel-tag">Salvo no navegador</span>
+          </div>
+          <form class="stack-form" id="classForm">
+            <div class="form-grid">
+              <label>
+                <span>Nome da turma</span>
+                <input id="className" name="className" type="text" placeholder="Ex.: 8o Ano B" required>
+              </label>
+              <label>
+                <span>Disciplina</span>
+                <input id="classSubject" name="classSubject" type="text" placeholder="Ex.: Historia" required>
+              </label>
+              <label>
+                <span>Turno</span>
+                <select id="classShift" name="classShift">
+                  <option value="Manha">Manha</option>
+                  <option value="Tarde">Tarde</option>
+                  <option value="Noite">Noite</option>
+                  <option value="Integral">Integral</option>
+                </select>
+              </label>
+              <label>
+                <span>Ano letivo</span>
+                <input id="classYear" name="classYear" type="number" min="2024" max="2100" value="2026" required>
+              </label>
+            </div>
+            <button class="primary-button" type="submit">Salvar turma</button>
+          </form>
+          <div class="class-list" id="classList"></div>
+        </article>
+
+        <article class="panel" id="alunos">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Alunos</p>
+              <h3>Cadastro por turma</h3>
+            </div>
+            <span class="panel-tag" id="studentPanelTag">Selecione uma turma</span>
+          </div>
+          <form class="stack-form" id="studentForm">
+            <div class="form-grid">
+              <label>
+                <span>Nome do aluno</span>
+                <input id="studentName" name="studentName" type="text" placeholder="Ex.: Ana Beatriz" required>
+              </label>
+              <label>
+                <span>Matricula</span>
+                <input id="studentRegistration" name="studentRegistration" type="text" placeholder="Ex.: 2026-084">
+              </label>
+              <label>
+                <span>Responsavel</span>
+                <input id="studentGuardian" name="studentGuardian" type="text" placeholder="Ex.: Maria Silva">
+              </label>
+              <label>
+                <span>Observacoes</span>
+                <input id="studentNotes" name="studentNotes" type="text" placeholder="Ex.: Acompanhamento de leitura">
+              </label>
+            </div>
+            <button class="primary-button" type="submit">Salvar aluno</button>
+          </form>
+          <div class="empty-state" id="studentEmptyState">
+            Escolha uma turma para comecar a cadastrar os alunos.
+          </div>
+          <ul class="student-list" id="studentList"></ul>
+        </article>
+
+        <article class="panel" id="tarefas">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Pendencias</p>
+              <h3>O que precisa acontecer</h3>
+            </div>
+            <span class="panel-tag">Semana atual</span>
+          </div>
+          <form class="task-form" id="taskForm">
+            <label for="taskInput" class="sr-only">Nova pendencia</label>
+            <input id="taskInput" name="task" type="text" placeholder="Ex.: Lancar notas do 7o ano">
+            <button class="primary-button" type="submit">Adicionar</button>
+          </form>
+          <ul class="task-list" id="taskList">
+            <li><input type="checkbox"> Separar atividades de recuperacao</li>
+            <li><input type="checkbox"> Atualizar relatorio mensal</li>
+            <li><input type="checkbox" checked> Imprimir lista de presenca</li>
+          </ul>
+        </article>
+
+        <article class="panel wide" id="planos">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Planos de aula</p>
+              <h3>Roteiro da semana</h3>
+            </div>
+            <span class="panel-tag">3 modelos</span>
+          </div>
+          <div class="lesson-grid">
+            <div class="lesson-card">
+              <h4>Segunda</h4>
+              <p>Revolucao Industrial</p>
+              <span>Objetivo: contexto historico</span>
+            </div>
+            <div class="lesson-card">
+              <h4>Quarta</h4>
+              <p>Cartografia e territorio</p>
+              <span>Atividade em grupo</span>
+            </div>
+            <div class="lesson-card">
+              <h4>Sexta</h4>
+              <p>Debate orientado</p>
+              <span>Rubrica de avaliacao</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel" id="documentos">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Documentos</p>
+              <h3>Arquivos importantes</h3>
+            </div>
+            <span class="panel-tag">Nuvem futura</span>
+          </div>
+          <ul class="document-list">
+            <li>
+              <strong>Plano anual 2026</strong>
+              <span>PDF • atualizado ontem</span>
+            </li>
+            <li>
+              <strong>Modelo de parecer</strong>
+              <span>DOCX • favorito</span>
+            </li>
+            <li>
+              <strong>Calendario escolar</strong>
+              <span>PDF • secretaria</span>
+            </li>
+          </ul>
+        </article>
+
+        <article class="panel" id="agenda">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Agenda</p>
+              <h3>Proximos eventos</h3>
+            </div>
+            <span class="panel-tag">Maio</span>
+          </div>
+          <ul class="agenda-list">
+            <li>
+              <strong>23 mai</strong>
+              <span>Conselho de classe</span>
+            </li>
+            <li>
+              <strong>25 mai</strong>
+              <span>Entrega de notas</span>
+            </li>
+            <li>
+              <strong>29 mai</strong>
+              <span>Reuniao com responsaveis</span>
+            </li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
